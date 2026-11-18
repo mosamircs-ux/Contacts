@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_launcher_name">Contacts</string>
+    <string name="app_launcher_name">Ocean Contacts</string>
     <string name="address">Address</string>
     <string name="street">Street</string>
     <string name="neighborhood">Appartment or suite number</string>
@@ -54,7 +54,7 @@
     <string name="manage_shown_contact_fields">Manage shown contact fields</string>
     <string name="contacts">Contacts</string>
     <string name="show_only_contacts_with_numbers">Show only contacts with phone numbers</string>
-    <string name="show_private_contacts">Show private contacts to Fossify Phone, Messages, and Calendar</string>
+    <string name="show_private_contacts">Show private contacts to compatible Phone, Messages, and Calendar apps</string>
     <string name="merge_duplicate_contacts">Merge duplicate contacts</string>
 
     <!-- Favorites -->
@@ -106,8 +106,12 @@
     <!-- FAQ -->
     <string name="faq_1_title">I want to change what fields are visible at contacts. Can I do it?</string>
     <string name="faq_1_text">Yes, all you have to do is go in Settings -> Manage shown contact fields. There you can select what fields should be visible. Some of them are even disabled by default, so you might find some new ones there.</string>
-    <!--
-        Haven't found some strings? There's more at
-        https://github.com/FossifyOrg/Commons/tree/master/commons/src/main/res
-    -->
+    <!-- Ocean About -->
+    <string name="ocean_about_tagline">Fast. Private. Beautifully Organized.</string>
+    <string name="ocean_about_description">Ocean Contacts brings a clean, modern Ocean Blue &amp; Slate design to managing your contacts, favorites, groups, and vCard backups effortlessly.</string>
+    <string name="ocean_about_features_title">Highlights</string>
+    <string name="ocean_about_features_body">• Smart instant search across contacts, favorites, and groups\n• Custom visible contact fields and duplicate merging\n• Full vCard (.vcf) import, export, and scheduled backups\n• Private device-only contact storage option</string>
+    <string name="ocean_about_license_title">Open Source License</string>
+    <string name="ocean_about_license_body">Built upon open-source contact management components licensed under GNU GPL v3.0. All trademarks and branding belong to Ocean Contacts.</string>
+    <string name="ocean_version_format">Version %1$s (%2$d)</string>
 </resources>

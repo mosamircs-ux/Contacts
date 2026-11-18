@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:clipToPadding="false"
-            app:layout_constraintBottom_toTopOf="@+id/main_tabs_holder"
+            app:layout_constraintBottom_toTopOf="@+id/main_ad_container"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
@@ -29,19 +29,35 @@
             android:layout_width="@dimen/dialpad_button_size"
             android:layout_height="@dimen/dialpad_button_size"
             android:layout_marginBottom="@dimen/activity_margin"
-            android:background="@drawable/circle_background"
+            android:background="@drawable/bg_ocean_fab"
             android:contentDescription="@string/dialpad"
-            android:elevation="@dimen/medium_margin"
+            android:elevation="8dp"
             android:padding="@dimen/activity_margin"
             android:src="@drawable/ic_dialpad_vector"
-            app:layout_constraintBottom_toTopOf="@+id/main_tabs_holder"
+            app:layout_constraintBottom_toTopOf="@+id/main_ad_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/main_ad_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="2dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/main_tabs_divider" />
+
+        <View
+            android:id="@+id/main_tabs_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_grey"
+            app:layout_constraintBottom_toTopOf="@+id/main_tabs_holder" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/main_tabs_holder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:tabIndicator="@null"
             app:tabMinWidth="150dp"

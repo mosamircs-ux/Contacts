@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.FitCenter
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.gms.ads.AdView
 import org.fossify.commons.dialogs.CallConfirmationDialog
 import org.fossify.commons.dialogs.ConfirmationDialog
 import org.fossify.commons.dialogs.SelectAlarmSoundDialog
@@ -41,6 +42,7 @@ class ViewContactActivity : ContactActivity() {
     private var duplicateInitialized = false
     private val mergeDuplicate: Boolean get() = config.mergeDuplicateContacts
     private val binding by viewBinding(ActivityViewContactBinding::inflate)
+    private var bannerAdView: AdView? = null
 
     companion object {
         private const val COMPARABLE_PHONE_NUMBER_LENGTH = 9
@@ -54,14 +56,18 @@ class ViewContactActivity : ContactActivity() {
             return
         }
 
-        setupEdgeToEdge(padBottomSystem = listOf(binding.contactScrollview))
+        setupEdgeToEdge(padBottomSystem = listOf(binding.contactScrollview, binding.contactAdContainer))
 
         showFields = config.showContactFields
         setupMenu()
+        binding.contactAdContainer.post {
+            bannerAdView = AdMobHelper.loadAdaptiveBanner(this, binding.contactAdContainer)
+        }
     }
 
     override fun onResume() {
         super.onResume()
+        bannerAdView?.resume()
         isViewIntent = intent.action == ContactsContract.QuickContact.ACTION_QUICK_CONTACT || intent.action == Intent.ACTION_VIEW
         if (isViewIntent) {
             handlePermission(PERMISSION_READ_CONTACTS) {
@@ -79,6 +85,17 @@ class ViewContactActivity : ContactActivity() {
                 initContact()
             }
         }
+    }
+
+    override fun onPause() {
+        bannerAdView?.pause()
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        bannerAdView?.destroy()
+        bannerAdView = null
+        super.onDestroy()
     }
 
     override fun onBackPressedCompat(): Boolean {

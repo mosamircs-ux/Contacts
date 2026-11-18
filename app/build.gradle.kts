@@ -24,8 +24,13 @@ fun hasSigningVars(): Boolean {
 
 base {
     val versionCode = project.property("VERSION_CODE").toString().toInt()
-    archivesName = "contacts-$versionCode"
+    archivesName = "ocean-contacts-$versionCode"
 }
+
+val admobTestAppId = "ca-app-pub-3940256099942544~3347511713"
+val admobTestBannerUnitId = "ca-app-pub-3940256099942544/9214589741"
+val admobReleaseAppId = project.findProperty("ADMOB_APP_ID")?.toString()?.takeIf { it.isNotBlank() } ?: admobTestAppId
+val admobReleaseBannerUnitId = project.findProperty("ADMOB_BANNER_UNIT_ID")?.toString()?.takeIf { it.isNotBlank() } ?: admobTestBannerUnitId
 
 android {
     compileSdk = project.libs.versions.app.build.compileSDKVersion.get().toInt()
@@ -69,10 +74,14 @@ android {
     buildTypes {
         debug {
             applicationIdSuffix = ".debug"
+            manifestPlaceholders["admobAppId"] = admobTestAppId
+            buildConfigField("String", "ADMOB_BANNER_AD_UNIT_ID", "\"$admobTestBannerUnitId\"")
         }
         release {
             isMinifyEnabled = true
             isShrinkResources = true
+            manifestPlaceholders["admobAppId"] = admobReleaseAppId
+            buildConfigField("String", "ADMOB_BANNER_AD_UNIT_ID", "\"$admobReleaseBannerUnitId\"")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -114,7 +123,7 @@ android {
         )
     }
 
-    namespace = project.property("APP_ID").toString()
+    namespace = "org.fossify.contacts"
 
     lint {
         checkReleaseBuilds = false
@@ -140,6 +149,7 @@ detekt {
 
 dependencies {
     implementation(libs.fossify.commons)
+    implementation(libs.google.play.services.ads)
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.autofittextview)
     implementation(libs.ezvcard)

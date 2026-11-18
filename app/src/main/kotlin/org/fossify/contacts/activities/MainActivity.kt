@@ -9,6 +9,7 @@ import android.graphics.drawable.Icon
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import androidx.viewpager.widget.ViewPager
+import com.google.android.gms.ads.AdView
 import me.grantland.widget.AutofitHelper
 import org.fossify.commons.databases.ContactsDatabase
 import org.fossify.commons.databinding.BottomTablayoutItemBinding
@@ -16,7 +17,6 @@ import org.fossify.commons.dialogs.ChangeViewTypeDialog
 import org.fossify.commons.dialogs.RadioGroupDialog
 import org.fossify.commons.extensions.*
 import org.fossify.commons.helpers.*
-import org.fossify.commons.models.FAQItem
 import org.fossify.commons.models.RadioItem
 import org.fossify.commons.models.Release
 import org.fossify.commons.models.contacts.Contact
@@ -32,6 +32,7 @@ import org.fossify.contacts.extensions.tryImportContactsFromFile
 import org.fossify.contacts.fragments.FavoritesFragment
 import org.fossify.contacts.fragments.MyViewPagerFragment
 import org.fossify.contacts.helpers.ALL_TABS_MASK
+import org.fossify.contacts.helpers.AdMobHelper
 import org.fossify.contacts.helpers.tabsList
 import org.fossify.contacts.interfaces.RefreshContactsListener
 import java.util.Arrays
@@ -50,6 +51,7 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
     override var isSearchBarEnabled = true
 
     private val binding by viewBinding(ActivityMainBinding::inflate)
+    private var bannerAdView: AdView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +64,9 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
         )
         storeStateVariables()
         setupTabs()
+        binding.mainAdContainer.post {
+            bannerAdView = AdMobHelper.loadAdaptiveBanner(this, binding.mainAdContainer)
+        }
         checkContactPermissions()
         checkWhatsNewDialog()
     }
@@ -134,24 +139,27 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
         }
 
         val dialpadIcon =
-            resources.getColoredDrawableWithColor(org.fossify.commons.R.drawable.ic_dialpad_vector, properPrimaryColor.getContrastColor())
+            resources.getColoredDrawableWithColor(org.fossify.commons.R.drawable.ic_dialpad_vector, android.graphics.Color.WHITE)
         binding.mainDialpadButton.apply {
             setImageDrawable(dialpadIcon)
-            background.applyColorFilter(properPrimaryColor)
             beVisibleIf(config.showDialpadButton)
         }
 
+        bannerAdView?.resume()
         isFirstResume = false
         checkShortcuts()
     }
 
     override fun onPause() {
+        bannerAdView?.pause()
         super.onPause()
         storeStateVariables()
         config.lastUsedViewPagerPage = binding.viewPager.currentItem
     }
 
     override fun onDestroy() {
+        bannerAdView?.destroy()
+        bannerAdView = null
         super.onDestroy()
         if (!isChangingConfigurations) {
             ContactsDatabase.destroyInstance()
@@ -175,8 +183,6 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
             findItem(R.id.dialpad).isVisible = !config.showDialpadButton
             findItem(R.id.change_view_type).isVisible = currentFragment == findViewById(R.id.favorites_fragment)
             findItem(R.id.column_count).isVisible = currentFragment == findViewById(R.id.favorites_fragment) && config.viewType == VIEW_TYPE_GRID
-            findItem(R.id.more_apps_from_us).isVisible =
-                resources.getBoolean(org.fossify.commons.R.bool.is_google_play_build)
         }
     }
 
@@ -200,7 +206,6 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
                 R.id.sort -> showSortingDialog(showCustomSorting = getCurrentFragment() is FavoritesFragment)
                 R.id.filter -> showFilterDialog()
                 R.id.dialpad -> launchDialpad()
-                R.id.more_apps_from_us -> launchMoreAppsFromUsIntent()
                 R.id.change_view_type -> changeViewType()
                 R.id.column_count -> changeColumnCount()
                 R.id.settings -> launchSettings()
@@ -459,20 +464,8 @@ class MainActivity : SimpleActivity(), RefreshContactsListener {
     }
 
     private fun launchAbout() {
-        val licenses = LICENSE_JODA or LICENSE_GLIDE or LICENSE_GSON or LICENSE_INDICATOR_FAST_SCROLL or LICENSE_AUTOFITTEXTVIEW
-
-        val faqItems = arrayListOf(
-            FAQItem(R.string.faq_1_title, R.string.faq_1_text),
-            FAQItem(org.fossify.commons.R.string.faq_9_title_commons, org.fossify.commons.R.string.faq_9_text_commons)
-        )
-
-        if (resources.getBoolean(org.fossify.commons.R.bool.is_google_play_build)) {
-            faqItems.add(FAQItem(org.fossify.commons.R.string.faq_2_title_commons, org.fossify.commons.R.string.faq_2_text_commons))
-            faqItems.add(FAQItem(org.fossify.commons.R.string.faq_6_title_commons, org.fossify.commons.R.string.faq_6_text_commons))
-            faqItems.add(FAQItem(org.fossify.commons.R.string.faq_7_title_commons, org.fossify.commons.R.string.faq_7_text_commons))
-        }
-
-        startAboutActivity(R.string.app_name, licenses, BuildConfig.VERSION_NAME, faqItems, true)
+        hideKeyboard()
+        startActivity(Intent(applicationContext, OceanAboutActivity::class.java))
     }
 
     override fun refreshContacts(refreshTabsMask: Int) {

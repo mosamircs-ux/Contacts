@@ -9,7 +9,8 @@
     <ScrollView
         android:id="@+id/contact_scrollview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/contact_ad_container"
         android:scrollbars="none"
         android:visibility="gone">
 
@@ -30,9 +31,9 @@
             <ImageView
                 android:id="@+id/contact_photo_bottom_shadow"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/top_shadow_height"
+                android:layout_height="112dp"
                 android:layout_alignBottom="@+id/contact_photo"
-                android:background="@drawable/gradient_background"
+                android:background="@drawable/bg_ocean_header_gradient"
                 android:contentDescription="@null" />
 
             <ImageView
@@ -42,9 +43,9 @@
                 android:layout_alignStart="@+id/contact_photo"
                 android:layout_alignBottom="@id/contact_photo"
                 android:layout_margin="@dimen/medium_margin"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:background="@drawable/bg_ocean_action_pill"
                 android:contentDescription="@string/toggle_favorite"
-                android:padding="@dimen/tiny_margin"
+                android:padding="10dp"
                 android:src="@drawable/ic_star_outline_vector"
                 android:visibility="gone" />
 
@@ -63,10 +64,9 @@
                     android:layout_width="@dimen/contact_actions_size"
                     android:layout_height="@dimen/contact_actions_size"
                     android:adjustViewBounds="true"
-                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:background="@drawable/bg_ocean_action_pill"
                     android:contentDescription="@string/send_email"
-                    android:paddingStart="@dimen/small_margin"
-                    android:paddingEnd="@dimen/small_margin"
+                    android:padding="11dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_mail_vector" />
 
@@ -76,10 +76,9 @@
                     android:layout_height="@dimen/contact_actions_size"
                     android:layout_marginStart="@dimen/normal_margin"
                     android:adjustViewBounds="true"
-                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:background="@drawable/bg_ocean_action_pill"
                     android:contentDescription="@string/call_contact"
-                    android:paddingStart="@dimen/small_margin"
-                    android:paddingEnd="@dimen/small_margin"
+                    android:padding="11dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_phone_vector" />
 
@@ -89,10 +88,9 @@
                     android:layout_height="@dimen/contact_actions_size"
                     android:layout_marginStart="@dimen/normal_margin"
                     android:adjustViewBounds="true"
-                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:background="@drawable/bg_ocean_action_pill"
                     android:contentDescription="@string/send_sms"
-                    android:paddingStart="@dimen/small_margin"
-                    android:paddingEnd="@dimen/small_margin"
+                    android:padding="11dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_sms_vector" />
 
@@ -440,4 +438,11 @@
             app:navigationIcon="@drawable/ic_arrow_left_vector" />
 
     </org.fossify.commons.views.MyAppBarLayout>
+    <FrameLayout
+        android:id="@+id/contact_ad_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingTop="2dp"
+        android:visibility="gone" />
 </RelativeLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Ocean Blue & Slate Brand Palette -->
+    <color name="ocean_primary">#0B63CE</color>
+    <color name="ocean_primary_dark">#084B9E</color>
+    <color name="ocean_accent">#0EA5E9</color>
+    <color name="ocean_sky_soft">#BAE6FD</color>
+    <color name="ocean_slate_950">#0B1220</color>
+    <color name="ocean_slate_900">#0F172A</color>
+    <color name="ocean_slate_800">#1E293B</color>
+    <color name="ocean_slate_700">#334155</color>
+    <color name="ocean_slate_400">#94A3B8</color>
+    <color name="ocean_slate_200">#E2E8F0</color>
+    <color name="ocean_slate_100">#F1F5F9</color>
+    <color name="ocean_slate_50">#F8FAFC</color>
+
+    <!-- Override Commons default theme colors -->
+    <color name="color_primary">@color/ocean_primary</color>
+    <color name="color_primary_dark">@color/ocean_primary_dark</color>
+    <color name="color_accent">@color/ocean_accent</color>
+    <color name="default_primary_color">@color/ocean_primary</color>
+    <color name="default_accent_color">@color/ocean_accent</color>
+    <color name="default_app_icon_color">@color/ocean_primary</color>
+    <color name="default_widget_text_color">@color/ocean_primary</color>
+
+    <!-- Slate Dark & Light Surfaces -->
+    <color name="theme_dark_background_color">@color/ocean_slate_900</color>
+    <color name="theme_dark_text_color">@color/ocean_slate_100</color>
+    <color name="theme_light_background_color">@color/ocean_slate_50</color>
+    <color name="theme_light_text_color">@color/ocean_slate_900</color>
+    <color name="bottom_tabs_light_background">#EFF6FF</color>
+    <color name="divider_grey">#3394A3B8</color>
+</resources>

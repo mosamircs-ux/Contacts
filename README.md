@@ -1,46 +1,30 @@
-# Fossify Contacts
-<img alt="Logo" src="graphics/icon.webp" width="120" />
+# Ocean Contacts
 
-<a href='https://play.google.com/store/apps/details?id=org.fossify.contacts'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height=80/></a> <a href="https://f-droid.org/packages/org.fossify.contacts/"><img src="https://fdroid.gitlab.io/artwork/badge/get-it-on-en.svg" alt="Get it on F-Droid" height=80/></a> <a href="https://apt.izzysoft.de/fdroid/index/apk/org.fossify.contacts"><img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" alt="Get it on IzzyOnDroid" height=80/></a>
+<img alt="Ocean Contacts Logo" src="graphics/icon.png" width="120" />
 
-Introducing Fossify Contacts - the next evolution in contact management. Poised to redefine how you manage your contacts, our app combines simplicity with advanced features, tailored for both personal and professional use.  
+**Ocean Contacts** (`com.mosamir.oceancontacts`) is a fast, modern, Ocean Blue & Slate Android contacts manager with smart search, groups, favorites, private device-only contacts, and full vCard (`.vcf`) import/export & automatic backups.
 
-🔍 **SMART SEARCH & FIELD CUSTOMIZATION:**  
-Locate contacts quickly with our intelligent search feature. Customize visible fields, enjoy a user-friendly interface, and find contacts effortlessly, saving time and enhancing productivity.
+<img alt="Ocean Contacts Feature Graphic" src="graphics/feature_graphic.png" width="100%" />
 
-✉️ **GROUP MANAGEMENT & COMMUNICATION:**  
-Effortlessly manage contact groups for streamlined communication. Our app facilitates easy grouping for batch emails or SMS, with features to create favorite lists and rename groups, enhancing your organizational capabilities.
+## Highlights
 
-🔄 **RELIABLE BACKUP & EXPORT OPTIONS:**  
-Ensure your contacts are always safe with our reliable backup system. Seamlessly export or import contacts in vCard format, making data migration and backup a breeze.
+- **Smart Search & Custom Fields**: Instantly search contacts, favorites, and groups, and choose which contact fields are displayed.
+- **Groups & Favorites**: Organize contacts into groups for quick batch SMS or email, and pin favorite contacts in list or grid view.
+- **vCard Backup & Restore**: Export and import `.vcf` files manually or configure scheduled automatic backups.
+- **Ocean Blue & Slate Design**: Clean Material theme with custom Ocean Blue & Slate palette, adaptive launcher icon, and frosted contact action controls.
+- **AdMob Monetization**: Anchored Adaptive Banner ads via Google Mobile Ads SDK (`debug` builds automatically use Google's official test ad IDs; `release` builds read `ADMOB_APP_ID` and `ADMOB_BANNER_UNIT_ID` from `gradle.properties`).
 
-🌐 **OPEN-SOURCE TRANSPARENCY:**  
-Built on an open-source platform, Fossify Contacts champions transparency and user trust. Access our code on GitHub and become part of a community that values privacy, openness, and collaborative improvement.
+## Building Releases
 
-🖼️ **PERSONALIZED USER EXPERIENCE:**  
-Customize your contact management with ease. Our app offers flexible settings and design options, allowing you to tailor the interface to your liking. Sort contacts, choose themes, and personalize your experience for maximum convenience.
+1. Set your live AdMob IDs in `gradle.properties`:
+   - `ADMOB_APP_ID`
+   - `ADMOB_BANNER_UNIT_ID`
+2. Ensure `keystore.properties` and `keystore.jks` are configured (gitignored).
+3. Build signed Google Play App Bundle (`.aab`) and APK:
+   ```powershell
+   .\gradlew.bat bundleGplayRelease assembleGplayRelease
+   ```
 
-🔋 **EFFICIENT & LIGHTWEIGHT:**  
-Optimized for performance, Fossify Contacts is designed to be light on your device's resources. It not only organizes your contacts efficiently but also contributes to longer battery life, ensuring smooth operation.
+## License
 
-🚀 **ADVANCED SYNCHRONIZATION:**  
-Whether you choose to store your contacts locally or prefer syncing them across devices using different means, our app ensures a smooth, efficient, and secure management experience.
-
-🔐 **PRIVACY-FIRST APPROACH:**  
-Your contact information remains confidential with Fossify Contacts. We prioritize your privacy, ensuring your data is never shared with third-party apps.
-
-🌙 **MODERN DESIGN & USER-FRIENDLY INTERFACE:**  
-Enjoy a clean, modern design with a user-friendly interface. The app features material design themes and a supports dynamic theming, providing a visually appealing and comfortable user experience.
-
-Download the app now and elevate your contact management to new heights. Your journey to efficient, secure, and intuitive contact organization begins here.
-
-➡️ Explore more Fossify apps: https://www.fossify.org<br>
-➡️ Open-Source Code: https://www.github.com/FossifyOrg<br>
-➡️ Join the community on Reddit: https://www.reddit.com/r/Fossify<br>
-➡️ Connect on Telegram: https://t.me/Fossify
-
-<div align="center">
-<img alt="App image" src="fastlane/metadata/android/en-US/images/phoneScreenshots/1_en-US.png" width="30%">
-<img alt="App image" src="fastlane/metadata/android/en-US/images/phoneScreenshots/2_en-US.png" width="30%">
-<img alt="App image" src="fastlane/metadata/android/en-US/images/phoneScreenshots/3_en-US.png" width="30%">
-</div>
+This project is based on open-source software licensed under the **GNU General Public License v3.0 (GPL-3.0)**. See [LICENSE](LICENSE) for full license terms.
